@@ -1,6 +1,25 @@
-.item {
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    background: lime;
+.drag {
+    z-index: 9;
+    background-color: lightgrey;
+    text-align: center;
+    min-height: 250px;
+    min-width: 250px;
+    max-height: 330px;
+    max-width: 330px;
 }
+
+/* Code below here is for dragging the item */
+
+.drag {
+    position: absolute;
+    overflow: auto;
+}
+
+.draggable-header {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: lime;
+    color: black;
+}
+
