@@ -72,4 +72,58 @@ function initDragElement() {
       return null;
     }
   }
+  // function dealing with resizing an element
+  function initResizeElement() {
+    var drags = document.getElementsByClassName("drag");
+    var element = null;
+    var startX, startY, startWidth, startHeight;
   
+    for (var i = 0; i < drags.length; i++) {
+      var p = drags[i];
+  
+      var right = document.createElement("div");
+      right.className = "resizer-right";
+      p.appendChild(right);
+      right.addEventListener("mousedown", initDrag, false);
+      right.parentDrag = p;
+  
+      var bottom = document.createElement("div");
+      bottom.className = "resizer-bottom";
+      p.appendChild(bottom);
+      bottom.addEventListener("mousedown", initDrag, false);
+      bottom.parentDrag = p;
+  
+      var both = document.createElement("div");
+      both.className = "resizer-both";
+      p.appendChild(both);
+      both.addEventListener("mousedown", initDrag, false);
+      both.parentDrag = p;
+    }
+  
+    function initDrag(e) {
+      element = this.parentDrag;
+  
+      startX = e.clientX;
+      startY = e.clientY;
+      startWidth = parseInt(
+        document.defaultView.getComputedStyle(element).width,
+        10
+      );
+      startHeight = parseInt(
+        document.defaultView.getComputedStyle(element).height,
+        10
+      );
+      document.documentElement.addEventListener("mousemove", doDrag, false);
+      document.documentElement.addEventListener("mouseup", stopDrag, false);
+    }
+  
+    function doDrag(e) {
+      element.style.width = startWidth + e.clientX - startX + "px";
+      element.style.height = startHeight + e.clientY - startY + "px";
+    }
+  
+    function stopDrag() {
+      document.documentElement.removeEventListener("mousemove", doDrag, false);
+      document.documentElement.removeEventListener("mouseup", stopDrag, false);
+    }
+  }
