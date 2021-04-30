@@ -1,2 +1,2 @@
 # Shadowing-Assignment
-Assignment from the person I am shadowing.
+Assignment that requires a div element to be draggable, resizeable, and savable to a window.
